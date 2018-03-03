@@ -48,7 +48,8 @@ $(BINDIR)/examples/hello_world.bin \
 $(BINDIR)/examples/benchmark_arithmetic.bin \
 $(BINDIR)/examples/adc_interrupt.bin \
 $(BINDIR)/examples/adc_dma.bin \
-$(BINDIR)/examples/led_from_mic.bin
+$(BINDIR)/examples/led_from_mic.bin \
+$(BINDIR)/examples/timer_counter.bin \
 
 clean:
 	rm -rf $(GENDIR)
@@ -141,3 +142,12 @@ $(addprefix $(OBJDIR), $(patsubst %.c,%.o,$(patsubst %.s,%.o,$(LED_FROM_MIC_SRCS
 $(ELFDIR)/examples/led_from_mic.elf: $(LED_FROM_MIC_OBJS)
 	@mkdir -p $(dir $@)
 	$(LD) $(LDFLAGS) -o $@ $(LED_FROM_MIC_OBJS)
+
+# Use the hardware timer to count milliseconds.
+TIMER_COUNTER_SRCS := $(wildcard examples/timer_counter/*.c)
+TIMER_COUNTER_OBJS := $(LIBRARY_OBJS) \
+$(addprefix $(OBJDIR), $(patsubst %.c,%.o,$(patsubst %.s,%.o,$(TIMER_COUNTER_SRCS))))
+
+$(ELFDIR)/examples/timer_counter.elf: $(TIMER_COUNTER_OBJS)
+	@mkdir -p $(dir $@)
+	$(LD) $(LDFLAGS) -o $@ $(TIMER_COUNTER_OBJS)
