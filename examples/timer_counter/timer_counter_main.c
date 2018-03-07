@@ -31,7 +31,7 @@ void OnReset(void) {
     StrCatInt32(adc_log, adc_log_length, seconds, 10);
     StrCatStr(adc_log, adc_log_length, ".");
     StrCatInt32(adc_log, adc_log_length, milliseconds, 10);
-    StrCatStr(adc_log, adc_log_length, "ms\n");
+    StrCatStr(adc_log, adc_log_length, "s\n");
     DebugLog(adc_log);
   }
 }

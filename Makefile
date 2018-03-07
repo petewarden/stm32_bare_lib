@@ -82,11 +82,10 @@ define BUILD_EXAMPLE_ELF
 $(1): $(2)
 	@mkdir -p $(dir $(1))
 	$(LD) $(LDFLAGS) -o $(1) $(2)
-$(info $(1): $(2))
 endef
 $(foreach name,$(EXAMPLES_NAMES),\
 $(eval $(call BUILD_EXAMPLE_ELF,\
-$(BINDIR)/examples/$(name).bin,\
+$(ELFDIR)/examples/$(name).elf,\
 $(LIBRARY_OBJS) $(patsubst %.c,$(OBJDIR)%.o,$(wildcard examples/$(name)/*.c)))))
 
 # Include dependency tracking rules.
